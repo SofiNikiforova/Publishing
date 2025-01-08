@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Админ - Заявки{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Заявки пользователей</h2>
+
+    {% if orders %}
+    <table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Тип продукции</th>
+            <th>Дата создания</th>
+            <th>Статус</th>
+            <th>Файл</th>
+            <th>Ответственный сотрудник</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                {% if order.product_type == 'book' %}
+                    Книга
+                {% elif order.product_type == 'magazine' %}
+                    Журнал
+                {% elif order.product_type == 'advertisement' %}
+                    Рекламная продукция
+                {% else %}
+                    Неизвестный тип
+                {% endif %}
+            </td>
+            <td>{{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+            <td class="
+                {% if order.status == 'Требуется доработка' %}
+                    table-danger
+                {% elif order.status == 'Принято в работу' %}
+                    table-success
+                {% elif order.status == 'Ожидает обработки' %}
+                    table-info
+                {% endif %}
+            ">
+                {{ order.status }}
+            </td>
+            <td>
+                {% if order.file_name %}
+                    <a href="{{ url_for('download_order_file', filename=order.file_name) }}" class="btn btn-outline-primary btn-sm">
+                        Скачать макет
+                    </a>
+                {% else %}
+                    Нет прикрепленного файла
+                {% endif %}
+            </td>
+            <td>{{ order.assigned_employee or "Не назначен" }}</td>
+            <td>
+                <a href="{{ url_for('view_order', order_id=order.id) }}" class="btn btn-primary btn-sm">Открыть</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    {% else %}
+    <p>Заявок пока нет.</p>
+    {% endif %}
+</div>
+{% endblock %}

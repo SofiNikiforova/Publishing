@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Сотрудники{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Сотрудники</h2>
+    <div class="row">
+        {% for employee in employees %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/' ~ employee.photo) }}" class="card-img-top" alt="{{ employee.name }}">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ employee.name }}</h5>
+                    <p class="card-text"><strong>Должность:</strong> {{ employee.position }}</p>
+                    <p class="card-text"><strong>Отдел:</strong> {{ employee.department }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

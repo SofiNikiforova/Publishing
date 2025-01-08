@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 960px;
+}
+
+h1.display-4 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+p.lead {
+    font-size: 1.25rem;
+    color: #6c757d;
+}
+
+.card {
+    width: 18rem;
+    border: none;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.employee-card {
+    width: 100%; /* Чтобы занимало всю ширину родителя */
+    max-width: 20rem; /* Ограничение по ширине */
+    margin: auto; /* Центрирование карточки */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
+    border-radius: 10px; /* Закругленные углы */
+}
+
+.employee-card .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover; /* Обрезка изображения */
+}
+
+.employee-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50; /* Более насыщенный цвет */
+}
+
+.employee-card .card-text {
+    font-size: 1rem;
+    color: #7f8c8d; /* Нежный серый цвет */
+}
+
+img.img-fluid {
+    max-height: 400px;
+    object-fit: cover;
+}
+/* Sticky Footer */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+
+/* Кнопка отправки */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+.img-uniform {
+    width: 100%; /* Изображения занимают всю ширину карточки */
+    height: 300px; /* Фиксированная высота */
+    object-fit: cover; /* Изображение обрезается, сохраняя пропорции */
+    border-radius: 10px; /* Закругленные углы */
+}
+.navbar {
+    background-color: #8B4513; /* Теплый коричневый */
+    font-family: 'Roboto Slab', serif; /* Красивый шрифт */
+    font-size: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.navbar .navbar-brand i {
+    margin-right: 8px; /* Расстояние между иконкой и текстом */
+}
+.navbar .nav-link {
+    color: white !important;
+}
+.navbar .nav-link:hover {
+    color: #FFD700 !important; /* Золотистый цвет при наведении */
+    text-decoration: underline;
+}
+.table-danger {
+    background-color: #b94e48 !important; /* Нежно-красный */
+    color: #1f0608; /* Темный текст */
+}
+
+.table-success {
+    background-color: #87a96b !important; /* Светло-зеленый */
+    color: #1f0608; /* Темный текст */
+}
+
+.table-info {
+    background-color: #f8f9fa !important; /* Светло-голубой */
+    color: #343a40; /* Темный текст */
+}
+

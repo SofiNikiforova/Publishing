@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Просмотр заявки{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Детали заявки #{{ order.id }}</h2>
+
+    <div class="mb-3">
+        <p><strong>Клиент:</strong> {{ order.client.username }}</p>
+        <p><strong>Email клиента:</strong> {{ order.client.email }}</p>
+        <p><strong>Тип продукции:</strong> {{ order.product_type }}</p>
+        <p><strong>Дата создания:</strong> {{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+        <p><strong>Статус:</strong> {{ order.status }}</p>
+        <p><strong>Ответственный сотрудник:</strong>
+            {{ order.assigned_employee or "Не назначен" }}
+        </p>
+    </div>
+
+    <!-- Поля заявки в зависимости от типа продукции -->
+    {% if order.product_type == 'book' %}
+    <div>
+        <h4>Информация о книге</h4>
+        <p><strong>Название:</strong> {{ order.book_title }}</p>
+        <p><strong>Автор:</strong> {{ order.author_name }}</p>
+        <p><strong>Количество страниц:</strong> {{ order.pages_count }}</p>
+        <p><strong>Тип переплета:</strong> {{ order.binding_type }}</p>
+        <p><strong>Тип бумаги:</strong> {{ order.paper_type }}</p>
+        <p><strong>Тираж:</strong> {{ order.copies_count }}</p>
+    </div>
+    {% elif order.product_type == 'magazine' %}
+    <div>
+        <h4>Информация о журнале</h4>
+        <p><strong>Название:</strong> {{ order.magazine_title }}</p>
+        <p><strong>Количество страниц:</strong> {{ order.magazine_pages_count }}</p>
+        <p><strong>Тип бумаги:</strong> {{ order.magazine_paper_type }}</p>
+        <p><strong>Тираж:</strong> {{ order.magazine_copies_count }}</p>
+    </div>
+    {% elif order.product_type == 'advertisement' %}
+    <div>
+        <h4>Информация о рекламной продукции</h4>
+        <p><strong>Тип бумаги:</strong> {{ order.advertisement_paper_type }}</p>
+        {% if order.advertisement_image_filename %}
+            <p><strong>Файл:</strong>
+                <a href="{{ url_for('download_order_file', filename=order.advertisement_image_filename) }}">
+                    {{ order.advertisement_image_filename }}
+                </a>
+            </p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Форма обновления статуса -->
+    <form method="POST">
+        <div class="mb-3">
+            <label for="status" class="form-label">Обновить статус</label>
+            <select class="form-select" id="status" name="status" required>
+                <option value="Принято в работу" {% if order.status == 'Принято в работу' %}selected{% endif %}>Принято в работу</option>
+                <option value="Требуется доработка" {% if order.status == 'Требуется доработка' %}selected{% endif %}>Требуется доработка</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Обновить статус</button>
+    </form>
+
+    <!-- Форма назначения сотрудника -->
+    <form method="POST" action="{{ url_for('assign_random_employee', order_id=order.id) }}">
+        <div class="mb-3 mt-4">
+            <label for="assigned_employee" class="form-label">Назначить сотрудника</label>
+            <select class="form-select" id="assigned_employee" name="assigned_employee" required>
+                <option value="" disabled selected>Выберите сотрудника</option>
+                <option value="Иван Иванов">Иван Иванов</option>
+                <option value="Анна Смирнова">Анна Смирнова</option>
+                <option value="Сергей Петров">Сергей Петров</option>
+                <option value="Мария Кузнецова">Мария Кузнецова</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Назначить сотрудника</button>
+    </form>
+</div>
+{% endblock %}

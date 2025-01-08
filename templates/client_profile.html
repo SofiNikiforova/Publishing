@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Личный кабинет</h2>
+    <div class="mb-4">
+        <p><strong>Имя пользователя:</strong> {{ current_user.username }}</p>
+        <p><strong>Email:</strong> {{ current_user.email }}</p>
+    </div>
+
+    <h4>Мои заявки</h4>
+    {% if orders %}
+        <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Тип продукции</th>
+                <th>Дата создания</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr ondblclick="location.href='{{ url_for('edit_order', order_id=order.id) }}';" style="cursor: pointer;">
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if order.product_type == 'book' %}
+                        Книга
+                    {% elif order.product_type == 'magazine' %}
+                        Журнал
+                    {% elif order.product_type == 'advertisement' %}
+                        Рекламная продукция
+                    {% else %}
+                        Неизвестный тип
+                    {% endif %}
+                </td>
+                <td>{{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                <td class="
+                    {% if order.status == 'Требуется доработка' %}
+                        table-danger
+                    {% elif order.status == 'Принято в работу' %}
+                        table-success
+                    {% elif order.status == 'Ожидает обработки' %}
+                        table-info
+                    {% endif %}
+                ">
+                    {{ order.status }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <p>У вас пока нет заявок.</p>
+    {% endif %}
+</div>
+{% endblock %}

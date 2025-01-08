@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заявки{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Оформление заявки</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <!-- Выбор типа продукции -->
+        <div class="mb-3">
+            <label for="product_type" class="form-label">Тип продукции</label>
+            <select class="form-select" id="product_type" name="product_type" required>
+                <option value="" disabled selected>Выберите тип продукции</option>
+                <option value="book">Книга</option>
+                <option value="magazine">Журнал</option>
+                <option value="advertisement">Рекламная продукция</option>
+            </select>
+        </div>
+
+        <!-- Поля для книги -->
+        <div id="book_fields" class="product-fields" style="display: none;">
+            <div class="mb-3">
+                <label for="book_title" class="form-label">Название книги</label>
+                <input type="text" class="form-control" id="book_title" name="book_title" placeholder="Введите название книги">
+            </div>
+            <div class="mb-3">
+                <label for="author_name" class="form-label">Имя автора</label>
+                <input type="text" class="form-control" id="author_name" name="author_name" placeholder="Введите имя автора">
+            </div>
+            <div class="mb-3">
+                <label for="pages_count" class="form-label">Количество страниц</label>
+                <input type="number" class="form-control" id="pages_count" name="pages_count" placeholder="Введите количество страниц">
+            </div>
+            <div class="mb-3">
+                <label for="binding_type" class="form-label">Тип переплета</label>
+                <select class="form-select" id="binding_type" name="binding_type">
+                    <option value="" disabled selected>Выберите тип переплета</option>
+                    <option value="Мягкий">Мягкий переплет</option>
+                    <option value="Твердый">Твердый переплет</option>
+                    <option value="Без переплета">Без переплета</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="paper_type" class="form-label">Тип бумаги</label>
+                <select class="form-select" id="paper_type" name="paper_type">
+                    <option value="" disabled selected>Выберите тип бумаги</option>
+                    <option value="Офсетная">Офсетная</option>
+                    <option value="Глянцевая">Глянцевая</option>
+                    <option value="Матовая">Матовая</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="copies_count" class="form-label">Тираж (количество экземпляров)</label>
+                <input type="number" class="form-control" id="copies_count" name="copies_count" placeholder="Введите тираж">
+            </div>
+        </div>
+
+        <!-- Поля для журнала -->
+        <div id="magazine_fields" class="product-fields" style="display: none;">
+            <div class="mb-3">
+                <label for="magazine_title" class="form-label">Название журнала</label>
+                <input type="text" class="form-control" id="magazine_title" name="magazine_title" placeholder="Введите название журнала">
+            </div>
+            <div class="mb-3">
+                <label for="magazine_pages" class="form-label">Количество страниц</label>
+                <input type="number" class="form-control" id="magazine_pages" name="magazine_pages" placeholder="Введите количество страниц">
+            </div>
+            <div class="mb-3">
+                <label for="magazine_paper_type" class="form-label">Тип бумаги</label>
+                <select class="form-select" id="magazine_paper_type" name="magazine_paper_type">
+                    <option value="" disabled selected>Выберите тип бумаги</option>
+                    <option value="Офсетная">Офсетная</option>
+                    <option value="Глянцевая">Глянцевая</option>
+                    <option value="Матовая">Матовая</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="magazine_copies" class="form-label">Тираж</label>
+                <input type="number" class="form-control" id="magazine_copies" name="magazine_copies" placeholder="Введите тираж">
+            </div>
+        </div>
+
+        <!-- Поля для рекламной продукции -->
+        <div id="advertisement_fields" class="product-fields" style="display: none;">
+            <div class="mb-3">
+                <label for="advertisement_paper_type" class="form-label">Тип бумаги</label>
+                <select class="form-select" id="advertisement_paper_type" name="advertisement_paper_type">
+                    <option value="" disabled selected>Выберите тип бумаги</option>
+                    <option value="Офсетная">Офсетная</option>
+                    <option value="Глянцевая">Глянцевая</option>
+                    <option value="Матовая">Матовая</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Поле загрузки файла -->
+        <div class="mb-3">
+            <label for="file_upload" class="form-label">Макет изделия (PDF, DOCX, JPG, PNG)</label>
+            <input type="file" class="form-control" id="file_upload" name="file_upload" accept=".pdf, .docx, .jpg, .png">
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Отправить заявку</button>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/dynamic_form.js') }}"></script>
+{% endblock %}

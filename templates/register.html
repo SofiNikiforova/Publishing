@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card shadow" style="max-width: 400px; width: 100%;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Регистрация</h4>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Имя пользователя</label>
+                    {{ form.username(class="form-control", id="username", placeholder="Введите имя пользователя") }}
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    {{ form.email(class="form-control", id="email", placeholder="Введите ваш email") }}
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    {{ form.password(class="form-control", id="password", placeholder="Введите пароль") }}
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Тип профиля</label>
+                    {{ form.role(class="form-select", id="role") }}
+                </div>
+                <button type="submit" class="btn btn-success w-100">Зарегистрироваться</button>
+            </form>
+            <p class="text-center mt-3">
+                Уже есть аккаунт? <a href="{{ url_for('login') }}">Войти</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

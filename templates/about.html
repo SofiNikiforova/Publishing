@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">О нашем издательстве</h1>
+        <p class="lead">Печатаем идеи, которые вдохновляют мир</p>
+    </div>
+
+    <!-- Описание издательства -->
+    <div class="row justify-content-center align-items-center mb-5">
+        <div class="col-md-6 text-center">
+            <p>
+                Мы — издательство с многолетним опытом работы в сфере печати книг, журналов и рекламной продукции.
+                Наша миссия — помочь авторам, компаниям и организациям воплощать свои идеи в жизнь через высококачественную
+                полиграфию.
+            </p>
+            <p>
+                Мы гордимся тем, что каждый проект, который мы принимаем, становится произведением искусства.
+                От небольших брошюр до многотомных изданий — мы печатаем все!
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="{{ url_for('static', filename='publishing.jpg') }}" alt="Офис издательства" class="img-fluid rounded shadow-lg">
+        </div>
+        <a href="{{ url_for('new_order') }}" class="btn btn-light mt-4" style="border: 1px solid #8B4513; color: #8B4513;">
+    Оформить заявку
+</a>
+
+
+    </div>
+
+    <!-- Примеры продукции -->
+    <div class="text-center mb-5">
+        <h2 class="mb-4">Примеры нашей продукции</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center mb-4">
+            <div class="card shadow-lg">
+                <img src="{{ url_for('static', filename='books.jpg') }}" class="img-uniform card-img-top" alt="Книга">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Художественная литература</h5>
+                    <p class="card-text">Мы создаем книги, которые вдохновляют миллионы читателей.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center mb-4">
+            <div class="card shadow-lg">
+                <img src="{{ url_for('static', filename='magazin.jpg') }}" class="img-uniform card-img-top" alt="Журнал">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Журналы</h5>
+                    <p class="card-text">Информативные и красочные журналы для любых тем и интересов.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center mb-4">
+            <div class="card shadow-lg">
+                <img src="{{ url_for('static', filename='cards.jpg') }}" class="img-uniform card-img-top" alt="Брошюра">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Рекламные материалы</h5>
+                    <p class="card-text">Яркие брошюры и буклеты для вашего бизнеса.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
